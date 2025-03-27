@@ -12,8 +12,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $alasan = $_POST["alasan"];
     $project_link = $_POST["project_link"];
 
-    if (empty($nama_lengkap) || empty($nim_nis) || empty($alamat) || empty($no_hp) || empty($email) || empty($sekolah_univ) || empty($jurusan) || empty($alasan) || empty($project_link_link)) {
+    if (empty($nama_lengkap) || empty($nim_nis) || empty($alamat) || empty($no_hp) || empty($email) || empty($sekolah_univ) || empty($jurusan) || empty($alasan) || empty($project_link)) {
         die("pastikan sudah mengisi semuanya dengan benar");
+    }
+
+    $result = "INSERT INTO pendaftaran_pkl (nama_lengkap, nim_nis, alamat, no_hp, email, sekolah_univ, jurusan, alasan, project_link)
+            VALUES ('$nama_lengkap', '$nim_nis', '$alamat', '$no_hp', '$email', '$sekolah_univ', '$jurusan', '$alasan', '$project_link')";
+
+    $result = pg_query($conn, $query);
+
+    if ($result) {
+        echo "Yeay! pendaftaran berhasil"
+    } else {
+        echo "yah, gagal mendaftar: " . pg_last_error($conn);
     }
 }
 ?>
