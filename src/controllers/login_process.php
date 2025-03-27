@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($password, $user["password"])) {
             $_SESSION["user"] = $user;
             header("Location: ../../profile.php");
-            
+            exit;
         } else {
             echo "password salah";
         }
