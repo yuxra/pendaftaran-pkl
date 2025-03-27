@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($user) {
             if (password_verify($password, $user["password"])) {
             $_SESSION["user"] = $user;
-            header("Location: ../../dashboard.php");
+            header("Location: ../../profile.php");
             
         } else {
             echo "password salah";
