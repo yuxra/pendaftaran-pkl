@@ -1,36 +1,23 @@
 <?php
-include '../../config/database.php';
-session_destroy();
+include '../config/database.php';
 session_start();
-$_SESSION = array();
-
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    if (empty($email) || empty($password)) {
-        die("email dan password harus diisi!");
-    }
-
-    $query = "SELECT * FROM users WHERE email = :'$email'";
-    $result = pg_query($conn, $query);
+    $query = "SELECT * FROM users WHERE email = $1";
+    $result = pg_query_params($conn, $query, array($email));
     $user = pg_fetch_assoc($result);
 
-    if ($user) {
-            if (password_verify($password, $user["password"])) {
-            $_SESSION["user"] = $user;
-            header("Location: ../../profile.php");
-            exit;
-        } else {
-            echo "password salah";
-        }
-
+    if ($user && password_verify($password, $user["password"])) {
+        $_SESSION["user"] = $user;
+        header("Location: ../views/profile.php");
+        exit;
     } else {
-        echo "email tidak ditemukan";
+        echo "Email atau password salah!";
     }
-    
 } else {
-    echo "akses ditolak";
+    echo "Akses ditolak!";
 }
 ?>
