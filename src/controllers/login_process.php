@@ -1,8 +1,9 @@
 <?php
 include '../../config/database.php';
+session_destroy();
 session_start();
-session_destroy(); // Reset session sebelum login
-session_start();
+$_SESSION = array();
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
@@ -19,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($user) {
             if (password_verify($password, $user["password"])) {
             $_SESSION["user"] = $user;
-            header("Location: ../../src/views/profile.php");
+            header("Location: ../../profile.php");
             exit;
         } else {
             echo "password salah";
