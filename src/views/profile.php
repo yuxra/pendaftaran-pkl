@@ -20,7 +20,7 @@ $user = $_SESSION["user"];
     <p>Email: <?= $user["email"] ?></p>
 
     <h3>Edit Profil</h3>
-    <form action="src/controllers/profile_process.php" method="POST">
+    <form action="../controllers/profile_process.php" method="POST">
         <input type="hidden" name="id" value="<?= $user['id'] ?>">
 
         <label>Username:</label><br>
@@ -33,6 +33,6 @@ $user = $_SESSION["user"];
     </form>
 
     <br>
-    <a href="src/controllers/logout_process.php">Logout</a>
+    <a href="../controllers/logout_process.php">Logout</a>
 </body>
 </html>
