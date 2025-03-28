@@ -1,38 +1,19 @@
 <?php
+include '../config/database.php';
 session_start();
 
-if (!isset($_SESSION["user"])) {
-    header("Location: login.php");
-    exit;
+$user_id = $_SESSION["user_id"];
+$query = "SELECT * FROM users WHERE id='$user_id'";
+$result = pg_query($conn, $query);
+$user = pg_fetch_assoc($result);
+
+echo "<h2>Profil Kamu</h2>";
+echo "<p>Username: " . $user["username"] . "</p>";
+echo "<p>Email: " . $user["email"] . "</p>";
+
+if (!empty($user["profile_picture"])) {
+    echo "<img src='/src/uploads/" . htmlspecialchars($user["profile_picture"]) . "' width='150'>";
+} else {
+    echo "<p>Belum ada foto profil</p>";
 }
-
-$user = $_SESSION["user"];
 ?>
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <title>Profile</title>
-    <link rel="stylesheet" href="../../public/style.css">
-</head>
-<body>
-    <div class="container">
-    <h1>Profil anda</h1>
-    <!-- <h3>Edit Profil</h3> -->
-    <form action="../controllers/profile_process.php" method="POST">
-        <input type="hidden" name="id" value="<?= $user['id'] ?>">
-
-        <label>Username:</label><br>
-        <input type="text" name="username" value="<?= $user['username'] ?>"><br>
-
-        <label>Email:</label><br>
-        <input type="email" name="email" value="<?= $user['email'] ?>"><br>
-
-        <button type="submit">Simpan</button>
-    </form>
-
-    <br>
-    <a href="../controllers/logout_process.php">Logout</a>
-    </div>
-</body>
-</html>
