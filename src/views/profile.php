@@ -13,13 +13,12 @@ $user = $_SESSION["user"];
 <html lang="id">
 <head>
     <title>Profile</title>
+    <link rel="stylesheet" href="../public/styles.css">
 </head>
 <body>
-    <h2>Profil Pengguna</h2>
-    <p>Username: <?= $user["username"] ?></p>
-    <p>Email: <?= $user["email"] ?></p>
-
-    <h3>Edit Profil</h3>
+    <div class="container">
+    <h1>Profil anda</h1>
+    <!-- <h3>Edit Profil</h3> -->
     <form action="../controllers/profile_process.php" method="POST">
         <input type="hidden" name="id" value="<?= $user['id'] ?>">
 
@@ -34,5 +33,6 @@ $user = $_SESSION["user"];
 
     <br>
     <a href="../controllers/logout_process.php">Logout</a>
+    </div>
 </body>
 </html>
