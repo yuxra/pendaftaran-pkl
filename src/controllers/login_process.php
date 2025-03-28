@@ -15,9 +15,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../views/pendaftaran_pkl.php");
         exit;
     } else {
-        echo "Email atau password salah!";
+        echo "<script>
+        window.location.href = '../views/login.php';
+        alert('Email atau password salah! coba lagi');
+    </script>";
     }
 } else {
-    echo "Akses ditolak!";
+    echo "<script>
+    window.location.href = '../views/login.php';
+    alert('akses ditolak');
+</script>";
 }
 ?>

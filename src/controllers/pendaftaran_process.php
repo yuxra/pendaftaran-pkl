@@ -1,5 +1,5 @@
 <?php
-include("config/database.php");
+include("../config/database.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nama_lengkap = $_POST["nama_lengkap"];
@@ -16,15 +16,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("pastikan sudah mengisi semuanya dengan benar");
     }
 
-    $result = "INSERT INTO pendaftaran_pkl (nama_lengkap, nim_nis, alamat, no_hp, email, sekolah_univ, jurusan, alasan, project_link)
+    $query = "INSERT INTO pendaftaran_pkl (nama_lengkap, nim_nis, alamat, no_hp, email, sekolah_univ, jurusan, alasan, project_link)
             VALUES ('$nama_lengkap', '$nim_nis', '$alamat', '$no_hp', '$email', '$sekolah_univ', '$jurusan', '$alasan', '$project_link')";
 
     $result = pg_query($conn, $query);
 
+
     if ($result) {
-        echo "Yeay! pendaftaran berhasil"
+        echo "<script>
+            alert('Yeay! Pendaftaran berhasil!');
+            window.location.href = '../views/pendaftaran_pkl.php'; // Ganti dengan halaman form-mu
+        </script>";
     } else {
-        echo "yah, gagal mendaftar: " . pg_last_error($conn);
+        echo "<script>
+            alert('Yah, gagal mendaftar: " . pg_last_error($conn) . "');
+            window.location.href = '../views/pendaftaran_pkl.php'; // Redirect balik ke form
+        </script>";
     }
+    
 }
 ?>
+
