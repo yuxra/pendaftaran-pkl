@@ -13,7 +13,7 @@ $user = $_SESSION["user"];
 <html lang="id">
 <head>
     <title>Profile</title>
-    <link rel="stylesheet" href="../public/styles.css">
+    <link rel="stylesheet" href="../../public/style.css">
 </head>
 <body>
     <div class="container">
